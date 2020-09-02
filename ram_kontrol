@@ -1,5 +1,5 @@
 #!/bin/sh
-ADMIN="burakdinc__gul@hotmail.com"
+ADMIN="kullanici@mail.com"
 ALERT=1000
 free  | grep -vE '^ |Swap:' | awk '{ print $3 " " $4 }' | while read output;
 do
