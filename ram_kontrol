@@ -1,0 +1,16 @@
+#!/bin/sh
+ADMIN="burakdinc__gul@hotmail.com"
+ALERT=1000
+free  | grep -vE '^ |Swap:' | awk '{ print $3 " " $4 }' | while read output;
+do
+  usep=$(echo $output | awk '{ print $1}' | cut -d' ' -f1  )
+  partition=$(echo $output | awk '{ print $2 }' )
+  hesap1=$(($usep/1024))
+  hesap2=$(($partition/1024))
+  if [ $usep -ge $ALERT ]; then
+    echo "DIKKAT RAM AZALIYOR BOŞ RAM ALANI: \"$hesap2 mb KULLANILAN RAM ALANI: $hesap1 mb\" KİŞİ: $(hostname) TARİH: $(date)" |
+     mail -s "RAM UYARISI ASIRI RAM KULLANIMI " $ADMIN
+  fi
+done
+
+
